@@ -12,4 +12,4 @@ while (texto != "FIN"):
     textoCodificado = mensaje.encode("utf8")
     s.sendto(textoCodificado, ("localhost", int(sys.argv[1])))    
 
-print("Fin de la conexión")
+print("Fin de la conexión") 
