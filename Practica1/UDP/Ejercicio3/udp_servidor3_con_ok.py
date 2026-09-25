@@ -15,7 +15,7 @@ while (True):
         print("Hemos recibido esto: ", datagrama.decode("utf-8"))
         print("Desde el origen: ", origen)
         confirmacionCodificado = confirmacion.encode("utf-8")
-        s.sendto(confirmacionCodificado, ("localhost", puerto))
+        s.sendto(confirmacionCodificado, ("localhost", origen[1]))
     else:
         print("Simulando paquete perdido")
 

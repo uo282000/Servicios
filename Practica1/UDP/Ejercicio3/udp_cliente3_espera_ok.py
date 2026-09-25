@@ -5,7 +5,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 texto = ""
 contador = 1
 puerto = int(sys.argv[1])
-s.settimeout(0.1)
+s.settimeout(3)
 while (texto != "FIN"):
     texto = input(">")
     tContador = str(contador)
@@ -17,7 +17,8 @@ while (texto != "FIN"):
     try:
         datagrama, origen = s.recvfrom(1024)
         recibido = datagrama.decode()
+        print(recibido)
     except socket.timeout:
         print("ERROR. El datagrama de confirmación no llega")
 
-print("Fin de la conexión") 
+print("Fin de la conexión")
