@@ -4,43 +4,22 @@ import socket
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 texto = ""
 contador = 1
-puerto = int(sys.argv[1])
+broadcast = str("172.18.255.255") #broadcast de la subred pruebas
+#puerto = int(sys.argv[1])
+puerto = int(8080)
 timeout = 0.1
 s.settimeout(timeout)
 #s.connect(("localhost", 1234)) no se usa al usar broadcast
 s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
-def mensajes2(origen):
-
-    while ((texto != "FIN") & (timeout < 2)):
-        texto = input(">")
-        tContador = str(contador)
-        mensaje = tContador+": "+texto
-        contador += 1
-        textoCodificado = mensaje.encode("utf8")
-        s.send(textoCodificado) 
-        
-        try:
-            datagrama, origen = s.recvfrom(1024)
-            recibido = datagrama.decode()
-            print(recibido)
-        except socket.timeout:
-            timeout *= 2
-            s.settimeout(timeout)
-            print("ERROR. El datagrama de confirmación no llega")
-
-    print("Puede que el servidor esté caído. Inténtelo más tarde")
-    print("Fin de la conexión")
-
 inicio = "BUSCANDO HOLA"
 inicioCodificado = inicio.encode()
-s.sendto(inicioCodificado, ("192.168.1.255", 12345)) #es la dirección de broadcast de la máquina linux
+s.sendto(inicioCodificado, (broadcast, puerto)) 
 
 def mensajes(datosServidor):
-    
     mensaje = "HOLA"
     textoCodificado = mensaje.encode("utf8")
-    s.connect((datosServidor[0], datosServidor[1]))
+    s.connect(datosServidor) #recibe una tupla
     s.send(textoCodificado) 
     
     try:
@@ -64,3 +43,5 @@ while (True):
         if primeraIP != None:
             mensajes(primeraIP)
         break
+print("Finalizada la conexion")
+
