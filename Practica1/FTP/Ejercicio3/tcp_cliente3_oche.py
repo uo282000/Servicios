@@ -7,10 +7,10 @@ puerto = int(sys.argv[1])
 
 s.connect(("localhost", puerto))
 
-texto = b"A2CDE" #lo hacemos de tipo bytes con la b
+texto = b"ABCDE" #lo hacemos de tipo bytes con la b
 
 for i in range(1,5):
     s.send(texto)
 
-s.send(b"FINAL")
+s.sendall(b"FINAL")
     
