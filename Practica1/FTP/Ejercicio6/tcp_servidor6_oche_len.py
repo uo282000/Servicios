@@ -22,26 +22,26 @@ while True:
     time.sleep(1)
     print("Nuevo cliente conectado desde %s, %d" % origen)
     continuar = True
-    f = sd.makefile(encoding="utf8", newline="\r\n")
+    f = sd.makefile(encoding="utf8", newline="\n")
     # Bucle de atención al cliente conectado
     while continuar:
-       # Primero recibir el mensaje del cliente
-        mensaje = f.readline()
-        #mensaje = sd.recv(1)  # Nunca enviará más de 80 bytes, aunque tal vez sí menos
-        if not mensaje:
+       # Primero recibir el mensaje con la longitud
+        longitud = f.readline()
+
+        if not longitud:
             f.close()
             sd.close()
             break
+
+        tam = int(longitud)
        
+        mensaje = f.read(tam)
 
         print(mensaje)
 
-        # Segundo, quitarle el "fin de línea" que son sus 2 últimos caracteres
-        linea = mensaje[:-2]  # slice desde el principio hasta el final -2
-
         # Tercero, darle la vuelta
-        linea = linea[::-1]
+        mensaje_reversa = mensaje[::-1]
 
-        # Finalmente, enviarle la respuesta con un fin de línea añadido
-        # Observa la transformación en bytes para enviarlo
-        sd.sendall(bytes(linea+"\r\n", "utf8"))
+        resp_bytes = bytes(mensaje_reversa, "utf8")
+        cabecera = "%d\n" % len(resp_bytes)
+        sd.sendall(bytes(cabecera, "utf8") + resp_bytes)
