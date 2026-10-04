@@ -1,0 +1,16 @@
+# Entornos virtuales de Python
+**/flaskenv/
+**/.venv/
+**/venv/
+**/.env/
+
+# Archivos compilados y caché de Python
+**/__pycache__/
+**/*.py[cod]
+
+# Datos persistentes de MariaDB
+**/basedatos/
+
+# Archivos de configuración de editores o sistema
+.vscode/
+.DS_Store
