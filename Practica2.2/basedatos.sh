@@ -6,4 +6,5 @@ docker run --name basedatos \
   -e MYSQL_DATABASE=amigosdb \
   -e MYSQL_PASSWORD=amigospass \
   -v $(pwd)/basedatos:/var/lib/mysql \
-  --rm --network pruebas -d mariadb
+  --rm --network pruebas -d 
+  
