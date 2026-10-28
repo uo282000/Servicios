@@ -1,2 +1,7 @@
 Para lanzar el flask
 source ~/flaskenv/bin/activate
+
+hacer depues de 2.3
+cd amigos
+docker build -t amigos:3.0 .
+docker build -f Dockerfile1w -t amigos:1w .
