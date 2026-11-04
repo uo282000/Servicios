@@ -1,25 +1,21 @@
-import sys
 import socket
+import sys
+import random
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-texto = ""
-contador = 1
-puerto = int(sys.argv[1])
-s.settimeout(3)
 
-while (texto != "FIN"):
-    texto = input(">")
-    tContador = str(contador)
-    mensaje = tContador+": "+texto
-    contador += 1
-    textoCodificado = mensaje.encode("utf8")
-    s.sendto(textoCodificado, ("localhost", puerto))
-    
-    try:
-        datagrama, origen = s.recvfrom(1024)
-        recibido = datagrama.decode()
-        print(recibido)
-    except socket.timeout:
-        print("ERROR. El datagrama de confirmación no llega")
+puerto = int(sys.argv[1]) if len(sys.argv) > 1 else 9999
+s.bind(("", puerto))
+confirmacion = "OK"
 
-print("Fin de la conexión")
+while (True):
+    datagrama, origen = s.recvfrom(1024) #recibe una dupla
+    numero = random.randint(0,1)
+    if (numero == 1): 
+        print("Hemos recibido esto: ", datagrama.decode("utf-8"))
+        print("Desde el origen: ", origen)
+        confirmacionCodificado = confirmacion.encode("utf-8")
+        s.sendto(confirmacionCodificado, origen)
+    else:
+        print("Simulando paquete perdido")
+
