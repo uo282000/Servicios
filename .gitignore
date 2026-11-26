@@ -13,4 +13,12 @@
 
 # Archivos de configuración de editores o sistema
 .vscode/
-.DS_Store
+.DS_Storehtml/video5/*.mp4
+html/video5/*.ogv
+html/video5/*.webm
+html/video5/*.zip
+Practica5/**/*.mp4
+Practica5/**/*.ogv
+Practica5/**/*.webm
+Practica5/**/*.png
+Practica5/**/*.zip

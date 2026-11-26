@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Vídeo HTML5 - Big Buck Bunny</title>
+</head>
+<body>
+    <h1>Prueba de vídeo nativo en HTML5</h1>
+    
+    <video width="640" height="360" controls>
+        <source src="big_buck_bunny.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="big_buck_bunny.webm" type='video/webm; codecs="vp8, vorbis"'>
+        <source src="big_buck_bunny.ogv" type='video/ogg; codecs="theora, vorbis"'>
+        
+        <!-- Fallback si el navegador no soporta <video> -->
+        <p>Tu navegador no soporta vídeo HTML5. Puedes <a href="big_buck_bunny.mp4">descargar el vídeo aquí</a>.</p>
+    </video>
+</body>
+</html>
